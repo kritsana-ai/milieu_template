@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milieu Campaign Intelligence | Scale Your Vision | Ready to Launch in Minutes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Milieu Color Palette based on provided images */
+            --m-blue: #00B8D9;
+            --m-blue-dark: #0090A8;
+            --m-blue-light: #E0F7FC;
+            --m-black: #050505;
+            --m-off-black: #111111;
+            --m-white: #FFFFFF;
+            --m-off-white: #F9F9F7;
+            --m-gray: #666666;
+            --m-gray-light: #AAAAAA;
+            --m-border: #E0E0DC;
+            /* Accents */
+            --coral: #FF5C4D;
+            --amber: #FFAA00;
+            --indigo: #3B3BCA;
+        }
+
+        /* --- CSS Global Reset & Typography --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Archivo', sans-serif; color: var(--m-black); background: var(--m-white); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+        h1 span, h2 span { color: var(--m-blue); }
+        p { font-size: 16px; color: var(--m-gray); margin-bottom: 30px; font-weight: 400; }
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- Reusable Components --- */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+        .btn { padding: 16px 32px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; border: none; text-align: center; font-size: 15px; }
+        .btn-primary { background: var(--m-blue); color: var(--m-white); }
+        .btn-primary:hover { background: var(--m-blue-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 184, 217, 0.4); }
+        .btn-secondary { background: transparent; color: var(--m-black); border: 1.5px solid var(--m-border); }
+        .btn-secondary:hover { border-color: var(--m-black); background: rgba(0,0,0,0.03); }
+        .badge { background: var(--m-blue-light); color: var(--m-blue-dark); padding: 10px 20px; border-radius: 4px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 30px; display: inline-block; }
+        .tag-amber { background: rgba(255, 170, 0, 0.1); color: var(--amber); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+        .tag-blue { background: rgba(0, 184, 217, 0.1); color: var(--m-blue); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+        .tag-indigo { background: rgba(59, 59, 202, 0.1); color: var(--indigo); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+        
+        /* --- 1. Navigation (Image Requirement 1) --- */
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); z-index: 2000; border-bottom: 1px solid var(--m-border); transition: padding 0.3s ease; }
+        nav.scrolled { padding: 10px 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .nav-logo { height: 35px; display: flex; align-items: center; }
+        .nav-logo img { height: 100%; width: auto; } /* Requirement 1: Use Provided Milieu Logo Regular.png */
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-link { font-size: 14px; font-weight: 600; color: var(--m-gray); transition: 0.2s; position: relative; }
+        .nav-link:hover { color: var(--m-black); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link::after { content: ''; display: block; width: 0; height: 2px; background: var(--m-blue); transition: width .3s; position: absolute; bottom: -5px; }
+
+        /* --- 2. Hero Section (Requirement 2 & Mockup Image 1) --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 160px 0 120px; background: radial-gradient(circle at top right, #f0faff, var(--m-white) 70%); position: relative; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+        .hero-title { font-size: clamp(48px, 5.5vw, 78px); line-height: 1.05; letter-spacing: -3px; margin-bottom: 30px; }
+        .hero-desc { max-width: 650px; font-size: 20px; color: var(--m-gray); margin-bottom: 50px; }
+        .hero-ctas { display: flex; gap: 20px; margin-bottom: 60px; }
+        
+        /* VC Component (Feedback 2): Brief -> Insights -> Decision Ready using icon element */
+        .hero-vc { padding: 40px; background: var(--m-white); border-radius: 15px; border: 1.5px solid var(--m-border); box-shadow: 0 10px 40px rgba(0,184,217,0.08); display: flex; justify-content: space-around; align-items: center; text-align: center; max-width: 700px; }
+        .vc-item { flex: 1; position: relative; }
+        .vc-item:not(:last-child)::after { content: '→'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); color: var(--m-gray-light); font-weight: 800; }
+        .vc-title { font-weight: 800; font-size: 16px; margin-top: 10px; }
+        .vc-desc { font-size: 12px; color: var(--m-gray); margin: 0; }
+        .vc-icon { width: 50px; height: 50px; display: inline-flex; padding: 10px; border-radius: 8px; background: var(--m-blue-light); color: var(--m-blue-dark); align-items: center; justify-content: center; }
+        .vc-icon img { width: 100%; height: auto; }
+
+        /* Requirement 3: Use rocket image for hero banner */
+        .hero-image { position: relative; }
+        .hero-rocket-visual { 
+            width: 100%; height: auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1); 
+            /* Realistic rocket launch integrated with glowing data streams, abstract timer, lightning */
+            background-image: url('space-rocket-successfully-takes-off-into-the-starr-2026-03-25-05-57-25-utc.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: var(--m-white); padding: 40px; 
+            min-height: 450px;
+        }
+        .launch-tag { position: absolute; top: 30px; right: 30px; }
+
+        /* --- 3. Staircase Section (Requirement 3: Plain to Illustration, Color Gradient, No Emoji) --- */
+        .staircase-section { padding: 120px 0; background: var(--m-off-white); text-align: center; }
+        .staircase-title { font-size: 42px; margin-bottom: 60px; }
+        .stair-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; height: 500px; position: relative; max-width: 1200px; margin: 0 auto 50px; align-items: flex-end; padding: 0 10px; }
+        .stair-step { background: var(--m-white); border-radius: 10px 10px 0 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; bottom: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--m-border); border-bottom: none; }
+        .stair-step:hover { transform: translateY(-15px) scale(1.03); border-color: var(--m-blue); box-shadow: 0 20px 40px rgba(0, 184, 217, 0.2); }
+        .stair-step.active { border-color: var(--m-blue); background: var(--m-blue-light); }
+        
+        /* 1-8 Color Scale Gradient + Dynamic Height */
+        .step-1 { height: 125px; border-top: 4px solid #E0F7FC; } /* Start Light Blue */
+        .step-2 { height: 178px; border-top: 4px solid #B4EAF5; }
+        .step-3 { height: 232px; border-top: 4px solid #8BE0EE; }
+        .step-4 { height: 286px; border-top: 4px solid #5DD5E7; }
+        .step-5 { height: 339px; border-top: 4px solid #33CBE0; }
+        .step-6 { height: 393px; border-top: 4px solid #00B8D9; } /* Milieu Blue */
+        .step-7 { height: 446px; border-top: 4px solid #0090A8; }
+        .step-8 { height: 500px; border-top: 4px solid #006070; } /* End Deep Blue/Dark */
+
+        .step-stage-num { font-weight: 800; font-size: 11px; letter-spacing: 1px; color: var(--m-gray-light); text-transform: uppercase; margin-bottom: 10px; }
+        .step-illust { 
+            width: 50px; height: 50px; border-radius: 10px; background: rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; margin-bottom: 15px;
+            /* Placeholder for artistic illustration Rendering, illustrative icon used in vc section */
+        }
+        .step-illust img { width: 100%; height: auto; }
+        
+        .step-module-name { font-weight: 800; font-size: 15px; color: var(--m-black); }
+        .step-cycle-label { font-size: 12px; color: var(--m-gray); }
+
+        /* Dynamic Module Info Box */
+        #module-info-box { max-width: 900px; margin: 60px auto 0; background: var(--m-white); padding: 40px; border-radius: 15px; border: 1.5px solid var(--m-border); box-shadow: 0 10px 30px rgba(0,0,0,0.03); text-align: center; min-height: 150px; opacity: 1; transition: 0.3s; }
+        .info-header { font-size: 24px; color: var(--m-blue); margin-bottom: 15px; }
+        .info-desc { font-size: 16px; color: var(--m-gray); margin-bottom: 0; }
+
+        /* --- 4. How Success Looks Grid (Requirement 4 & Mockup Image 2) --- */
+        .howworks { padding: 120px 0; background: var(--m-white); }
+        .howworks-label { font-size: 13px; font-weight: 600; color: var(--m-gray); text-align: center; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .howworks-headline { font-size: 38px; text-align: center; margin-bottom: 60px; }
+        .howworks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--m-border); border-radius: 15px; overflow: hidden; border: 1px solid var(--m-border); box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .hw-cell { background: var(--m-white); padding: 40px 30px; transition: background 0.3s; cursor: pointer; }
+        .hw-cell:hover { background: var(--m-off-white); }
+        .hw-icon-wrapper { width: 50px; height: 50px; display: inline-flex; padding: 10px; border-radius: 8px; background: var(--m-blue-light); color: var(--m-blue-dark); align-items: center; justify-content: center; margin-bottom: 20px; }
+        .hw-icon-wrapper img { width: 100%; height: auto; }
+        .hw-title { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--m-black); }
+        .hw-desc { font-size: 14px; line-height: 1.6; color: var(--m-gray); }
+
+        /* --- 5. Tiers Section (Requirement 5 & Mockup Image 3 - design both, button quote) --- */
+        .products { padding: 120px 0; background: var(--m-white); }
+        .products-title { text-align: center; font-size: 42px; margin-bottom: 10px; }
+        .products-subtitle { text-align: center; color: var(--m-gray); margin-bottom: 70px; }
+        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .product-card { border-radius: 20px; padding: 60px; border: 1.5px solid var(--m-border); transition: 0.3s; position: relative; overflow: hidden; }
+        .card-lite { background: var(--m-blue-light); border-color: rgba(0,184,217,0.2); }
+        .card-expanded { background: var(--m-black); color: var(--m-white); border-color: var(--m-off-black); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .product-label { font-size: 11px; font-weight: 700; color: var(--m-gray); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; display: block; }
+        .card-expanded .product-label { color: var(--m-gray-light); }
+        .product-name { font-size: 38px; margin-bottom: 10px; }
+        .card-lite .product-name { color: var(--m-black); }
+        .card-expanded .product-name { color: var(--m-white); }
+        .product-tagline { font-size: 16px; color: var(--m-blue-dark); margin-bottom: 40px; font-weight: 600; }
+        .card-expanded .product-tagline { color: var(--m-blue); }
+        .product-features { list-style: none; margin-bottom: 50px; }
+        .product-features li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; font-size: 15px; }
+        .card-lite .product-features li { color: #005F72; }
+        .card-expanded .product-features li { color: rgba(255,255,255,0.8); }
+        .feat-check { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--m-white); }
+        .card-lite .feat-check { background: var(--m-blue); }
+        .card-expanded .feat-check { background: rgba(0,184,217,0.3); color: var(--m-blue); }
+        .product-price { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 30px; margin-bottom: 30px; }
+        .card-expanded .product-price { border-top-color: rgba(255,255,255,0.1); }
+        .price-label { font-size: 12px; color: var(--m-gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .price-val { font-size: 28px; font-weight: 800; color: var(--m-black); }
+        .card-expanded .price-val { color: var(--m-white); }
+        .products-cta { text-align: center; margin-top: 60px; }
+
+        /* --- 6. Client Targeting (Requirement 6 & Mockup Image 4 - Design segments) --- */
+        .targets { padding: 120px 0; background: var(--m-off-white); }
+        .targets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(0,0,0,0.03); border-radius: 15px; overflow: hidden; max-width: 1200px; margin: 60px auto 0; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .target-item { background: var(--m-white); padding: 50px; transition: 0.3s; }
+        .target-item:hover { background: var(--m-off-white); }
+        .seg-label { font-size: 11px; color: var(--m-gray-light); font-weight: 700; margin-bottom: 10px; display: block; }
+        .seg-icon-box { width: 60px; height: 60px; display: inline-flex; margin-bottom: 25px; padding: 15px; border-radius: 10px; background: rgba(0,0,0,0.02); align-items: center; justify-content: center; }
+        .seg-icon-box img { width: 100%; height: auto; }
+        .seg-title { font-size: 22px; font-weight: 800; margin-bottom: 15px; }
+        .seg-desc { font-size: 14px; color: var(--m-gray); margin-bottom: 25px; }
+        .target-industries { margin-top: auto; padding-top: 25px; border-top: 1px solid rgba(0,0,0,0.05); }
+        .ind-item { font-size: 11px; color: var(--m-gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
+
+        /* --- 7. Research Gap (Feedback 1 & Img 1) & FAQ Form (Requirement 7 & Mockup Images 5 & 6) --- */
+        .gap { padding: 120px 0; background: var(--m-off-black); color: var(--m-white); }
+        .gap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #222; border-radius: 15px; overflow: hidden; border: 1px solid #222; }
+        .gap-cell { background: #080808; padding: 40px; transition: 0.3s; }
+        .gap-cell:hover { background: #0A0A0A; }
+        /* Box color matching source */
+        .gap-cell.lite { background: rgba(255, 92, 77, 0.05); border-top: 2px solid var(--coral); }
+        .gap-cell.hybrid { background: rgba(255, 170, 0, 0.05); border-top: 2px solid var(--amber); }
+        .gap-cell.expanded { background: rgba(0, 184, 217, 0.05); border-top: 2px solid var(--m-blue); }
+        .gap-cell.adaptive { background: rgba(59, 59, 202, 0.1); border-top: 2px solid var(--indigo); }
+        
+        .gap-title { color: var(--m-white); font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+        .gap-desc { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 20px; }
+        /* Gap Icon matching source */
+        .gap-icon { font-size: 18px; color: #555; margin-right: 10px; }
+        .gap-cell.lite .gap-icon, .gap-cell.hybrid .gap-icon { color: var(--coral); }
+        .gap-cell.expanded .gap-icon, .gap-cell.adaptive .gap-icon { color: var(--m-blue); }
+        .gap-status { font-weight: 700; font-size: 11px; letter-spacing: 1px; color: #555; text-transform: uppercase; display: flex; align-items: center; }
+
+        .faq-form { padding: 120px 0; background: var(--m-off-white); }
+        .faq-form-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; }
+        .form-trust-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 30px; }
+        .form-trust-icon { width: 40px; height: 40px; display: inline-flex; font-size: 20px; color: var(--m-blue-dark); background: var(--m-blue-light); padding: 10px; border-radius: 6px; align-items: center; justify-content: center; }
+        
+        .form-card { background: var(--m-white); padding: 50px; border-radius: 15px; border: 1.5px solid var(--m-border); box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 12px; font-weight: 600; color: var(--m-gray); text-transform: uppercase; display: block; margin-bottom: 8px; }
+        .form-input, .form-select, .form-textarea { width: 100%; padding: 14px; border-radius: 6px; border: 1.5px solid var(--m-border); background: var(--m-off-white); font-family: 'Archivo', sans-serif; transition: 0.3s; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--m-blue); outline: none; }
+        .form-select option { background: white; color: var(--m-black); }
+        .form-textarea { resize: vertical; min-height: 120px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--m-gray); font-size: 12px; background: var(--m-off-white); }
+
+        @media (max-width: 1100px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 48px; }
+            .hero-rocket-visual { order: -1; min-height: 350px; }
+            .stair-grid { grid-template-columns: repeat(4, 1fr); height: auto; gap: 10px; }
+            .step-8 { height: 250px; } .step-7 { height: 230px; } /* Adjust heights for smaller screens */
+            .products-grid { grid-template-columns: 1fr; }
+            .targets-grid { grid-template-columns: 1fr; }
+            .gap-grid { grid-template-columns: repeat(2, 1fr); }
+            .faq-form-grid { grid-template-columns: 1fr; gap: 40px; }
+            nav { padding: 20px 40px; } .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-logo">
+            <img src="Milieu Logo Regular.png" alt="Milieu Insight Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#why" class="nav-link">Why CI</a></li>
+            <li><a href="#architecture" class="nav-link">Architecture</a></li>
+            <li><a href="#deployment" class="nav-link">Deployment</a></li>
+            <li><a href="#pricing" class="nav-link">Pricing</a></li>
+            <li><a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 13px;">Request Demo</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text" data-aos="fade-right">
+                <div class="badge">Enterprise modular architecture</div>
+                <h1 class="hero-title">Campaign<br>Intelligence<br>Scales <span>with you.</span></h1>
+                <p class="hero-desc">The one modular system connecting every stage of your campaign cycle — de-risking creative decisions and accelerating growth.</p>
+                
+                <div class="hero-ctas">
+                    <a href="#deployment" class="btn btn-primary">Start Simple (Lite Mi)</a>
+                    <a href="#architecture" class="btn btn-secondary">Explore Advanced (Expanded Mi)</a>
+                </div>
+
+                <div class="hero-vc" data-aos="fade-up" data-aos-delay="200">
+                    <div class="vc-item">
+                        <div class="vc-icon">
+                            <img src="https://img.icons8.com/?size=100&id=pU0D8b7o3kE4&format=png&color=00B8D9" alt="Brief icon">
+                        </div>
+                        <div class="vc-title">Brief</div>
+                        <p class="vc-desc">Client objective input</p>
+                    </div>
+                    <div class="vc-item">
+                        <div class="vc-icon">
+                            <img src="https://img.icons8.com/?size=100&id=YfVq6vSgP18z&format=png&color=00B8D9" alt="Insights icon">
+                        </div>
+                        <div class="vc-title">Insights</div>
+                        <p class="vc-desc">Rapid consumer feedback</p>
+                    </div>
+                    <div class="vc-item">
+                        <div class="vc-icon">
+                            <img src="https://img.icons8.com/?size=100&id=32279&format=png&color=00B8D9" alt="Decision Ready icon">
+                        </div>
+                        <div class="vc-title">Decision Ready</div>
+                        <p class="vc-desc">Actionable outcome clarity</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image" data-aos="fade-left">
+                <div class="hero-rocket-visual">
+                    <div class="badge launch-tag tag-amber">Ready to launch in minutes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="staircase-section" id="architecture">
+        <div class="container">
+            <div class="section-label tag-blue" style="margin-bottom: 10px;">The Spine</div>
+            <h2 class="staircase-title" data-aos="fade-up">Two modules. One intelligent platform.</h2>
+            <p style="color: var(--m-gray); max-width: 600px; margin: 0 auto 60px;"> moving from Lite Mi to Expanded Mi isn't a platform switch, it's a natural step forward. </p>
+
+            <div class="stair-grid">
+                <div class="stair-step step-1 active" onclick="showModule('spark')" data-aos="fade-up">
+                    <span class="step-stage-num">Stage 01</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=YfVq6vSgP18z&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Spark Mi</span>
+                    <span class="step-cycle-label">Idea Testing</span>
+                </div>
+                <div class="stair-step step-2" onclick="showModule('shape')" data-aos="fade-up" data-aos-delay="100">
+                    <span class="step-stage-num">Stage 02</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=113032&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Shape Mi</span>
+                    <span class="step-cycle-label">Wireframes Dev</span>
+                </div>
+                <div class="stair-step step-3" onclick="showModule('impact')" data-aos="fade-up" data-aos-delay="200">
+                    <span class="step-stage-num">Stage 03</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=p9P7I2hP1J65&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Impact Mi</span>
+                    <span class="step-cycle-label">Ad Testing</span>
+                </div>
+                <div class="stair-step step-4" onclick="showModule('reach')" data-aos="fade-up" data-aos-delay="300">
+                    <span class="step-stage-num">Stage 04</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=32279&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Reach Mi</span>
+                    <span class="step-cycle-label">Media Fit</span>
+                </div>
+                <div class="stair-step step-5" onclick="showModule('track')" data-aos="fade-up" data-aos-delay="400">
+                    <span class="step-stage-num">Stage 05</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=42220&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Track Mi</span>
+                    <span class="step-cycle-label">Monitoring</span>
+                </div>
+                <div class="stair-step step-6" onclick="showModule('proof')" data-aos="fade-up" data-aos-delay="500">
+                    <span class="step-stage-num">Stage 06</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=83020&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Proof Mi</span>
+                    <span class="step-cycle-label">Post-Campaign</span>
+                </div>
+                <div class="stair-step step-7" onclick="showModule('loop')" data-aos="fade-up" data-aos-delay="600">
+                    <span class="step-stage-num">Stage 07</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=R3u6m8l23Y2O&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Loop Mi</span>
+                    <span class="step-cycle-label">Learning</span>
+                </div>
+                <div class="stair-step step-8" onclick="showModule('pulse')" data-aos="fade-up" data-aos-delay="700">
+                    <span class="step-stage-num">Stage 08</span>
+                    <div class="step-illust">
+                        <img src="https://img.icons8.com/?size=100&id=x6wD73H0p0C9&format=png&color=000000" alt="Illust Icon">
+                    </div>
+                    <span class="step-module-name">Adaptive Mi</span>
+                    <span class="step-cycle-label">Always-On</span>
+                </div>
+            </div>
+
+            <div id="module-info-box" data-aos="zoom-in">
+                <h4 class="info-header">Stage 1: Spark Mi (Idea Testing)</h4>
+                <p class="info-desc">Lite Mi deployment: Fixed adhoc validation. Wave reset logic. Expanded Mi: Deeper segmentation portraits connection longitudinal waves waves.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="howworks" id="why">
+        <div class="container">
+            <div class="howworks-label">Campaign success looks like with us:</div>
+            <h2 class="howworks-headline" data-aos="fade-up">Validated clarity, fast.</h2>
+            
+            <div class="howworks-grid" data-aos="fade-up">
+                <div class="hw-cell">
+                    <div class="hw-icon-wrapper">
+                        <img src="https://img.icons8.com/?size=100&id=42048&format=png&color=0090A8" alt="Icon">
+                    </div>
+                    <div class="hw-title">Choose entry point</div>
+                    <p class="hw-desc">Start tactical with one Lite Mi module for immediate demo/nb needs, or Expanded Mi for established strategic continuity across multiple markets.</p>
+                </div>
+                <div class="hw-cell">
+                    <div class="hw-icon-wrapper">
+                        <img src="https://img.icons8.com/?size=100&id=pU0D8b7o3kE4&format=png&color=0090A8" alt="Icon">
+                    </div>
+                    <div class="hw-title">Connect campaigns</div>
+                    <p class="hw-desc">Integrate consumer insights directly into workflows. Link to wider Milieu capabilities like Portraits or ongoing Tracking for deeper diagnostics.</p>
+                </div>
+                <div class="hw-cell">
+                    <div class="hw-icon-wrapper">
+                        <img src="https://img.icons8.com/?size=100&id=42220&format=png&color=0090A8" alt="Icon">
+                    </div>
+                    <div class="hw-title">Get clarity, fast</div>
+                    <p class="hw-desc">Pre-defined stages de-risk creative earlier, benchmark ad effectiveness, and optimize channel fit with standard outputs and rapid 24h turnaround.</p>
+                </div>
+                <div class="hw-cell">
+                    <div class="hw-icon-wrapper">
+                        <img src="https://img.icons8.com/?size=100&id=42083&format=png&color=0090A8" alt="Icon">
+                    </div>
+                    <div class="hw-title">Scale on terms</div>
+                    <p class="hw-desc">Move beyond tactic to serious campaign intelligence. Lite Mi builds longitudinal loops; Expanded Mi scales depth, cuts, and multi-market orchestration when ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="deployment">
+        <div class="container">
+            <h2 class="products-title" data-aos="fade-up">Two modules. Scale as Needed.</h2>
+            <p class="products-subtitle" data-aos="fade-up">Move from fast-entry ad hoc validation into scalable enterprise programs.</p>
+            
+            <div class="products-grid">
+                <div class="product-card card-lite" data-aos="fade-right">
+                    <span class="product-label">Standard Entry Path</span>
+                    <h3 class="product-name">Lite Mi</h3>
+                    <p class="product-tagline">Speed, Simplicity and Easy Buyer Entry.</p>
+                    <ul class="product-features">
+                        <li><span class="feat-check">✓</span>Fixed or tightly controlled module structures</li>
+                        <li><span class="feat-check">✓</span>Standard sample assumptions & clear outputs</li>
+                        <li><span class="feat-check">✓</span>Delivered with low buyer effort & minimal manual lift</li>
+                        <li><span class="feat-check">✓</span>Rapid 24h turnaround to validate tactical decisions</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price-val">Tactical</span>
+                        <span class="price-label" style="display: block;">Ad hoc decisions / Pitching / Local market</span>
+                    </div>
+                </div>
+
+                <div class="product-card card-expanded" data-aos="fade-left">
+                    <span class="product-label tag-amber">Enterprise Advanced Path</span>
+                    <h3 class="product-name">Expanded Mi</h3>
+                    <p class="product-tagline">Full coverage, customization and strategic depth.</p>
+                    <ul class="product-features">
+                        <li><span class="feat-check">✓</span>Flexibility for more stages across campaign cycle</li>
+                        <li><span class="feat-check">✓</span>Deeper segmentation, diagnostis, cuts, and Portraits overlays</li>
+                        <li><span class="feat-check">✓</span>Continuous learning loops & strong continuity across projects</li>
+                        <li><span class="feat-check">✓</span>Stronger decision architecture & multi-market orchestration</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price-val">Strategic</span>
+                        <span class="price-label" style="display: block; color: var(--m-gray-light);">Continuity & Scale / Benchmark / Data ownership</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-cta" data-aos="fade-up">
+                <a href="#contact" class="btn btn-primary" style="background:var(--amber);">Get a Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="targets">
+        <div class="container">
+            <div class="badge tag-amber">Segmentation</div>
+            <h2 data-aos="fade-up">3 Client Segments,<br>2 Entry Points.</h2>
+            
+            <div class="targets-grid" data-aos="fade-up">
+                <div class="target-item">
+                    <span class="seg-label">Segment 01 · Lite Fit</span>
+                    <div class="seg-icon-box tag-blue">
+                        <img src="https://img.icons8.com/?size=100&id=42220&format=png&color=00B8D9" alt="Tactical icon">
+                    </div>
+                    <h4 class="seg-title">Tactical</h4>
+                    <p class="seg-desc">Buy Lite Mi modules for immediate validation. Low budged, local market focus, adhoc pitching, or workflow speed decisions without complex infrastructure needs.</p>
+                    <div class="target-industries">
+                        <span class="ind-item">Agencies / NB Teams</span>
+                        <span class="ind-item">FMCG / Retail</span>
+                        <span class="ind-item">Social / Entertainment</span>
+                    </div>
+                </div>
+                <div class="target-item">
+                    <span class="seg-label">Segment 02 · Lite → Expanded Path</span>
+                    <div class="seg-icon-box tag-amber">
+                        <img src="https://img.icons8.com/?size=100&id=113032&format=png&color=FFAA00" alt="Hybrid icon">
+                    </div>
+                    <h4 class="seg-title">Hybrid</h4>
+                    <p class="seg-desc">Buy modules now while actively signaling future scale. Growing brands lack legacy systems but need shared learning framework across new products or market territories.</p>
+                    <div class="target-industries">
+                        <span class="ind-item">Scaling Tech / Direct Brands</span>
+                        <span class="ind-item">Expanding Portfolio</span>
+                        <span class="ind-item">Growing research teams</span>
+                    </div>
+                </div>
+                <div class="target-item">
+                    <span class="seg-label">Segment 03 · Expanded Fit</span>
+                    <div class="seg-icon-box tag-indigo">
+                        <img src="https://img.icons8.com/?size=100&id=R3u6m8l23Y2O&format=png&color=3B3BCA" alt="Strategic icon">
+                    </div>
+                    <h4 class="seg-title">Strategic</h4>
+                    <p class="seg-desc">Buy Expanded Mi as structured framework sell. Established clients need automation, data ownership, benchmark logic, global standardization, and data segmentation complexity.</p>
+                    <div class="target-industries">
+                        <span class="ind-item">Global Enterprise</span>
+                        <span class="ind-item">Automotive / Finance</span>
+                        <span class="ind-item">Connecting Brand tracking + CI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gap">
+        <div class="container">
+            <h2 style="color:white; font-size: 38px;" data-aos="fade-up">Bridge the 'Research Gap'</h2>
+            <p style="color: rgba(255,255,255,0.7); max-width: 600px;" data-aos="fade-up">One architecture with shared commercial logic, module names, campaign logic, and visual spine helps move from fast tactical validation to deeper strategic program scale.</p>
+            
+            <div class="gap-grid" data-aos="fade-up">
+                <div class="gap-cell lite">
+                    <h4 class="gap-title">Adhoc Validationsreset موجة</h4>
+                    <p class="gap-desc">Insights compound tactical decisions Wave by wave reset.</p>
+                    <div class="gap-status">
+                        <span class="gap-icon">❌</span> Wave reset logic
+                    </div>
+                </div>
+                <div class="gap-cell hybrid">
+                    <h4 class="gap-title">Manual Manual Manual موجة</h4>
+                    <p class="gap-desc">Insights reset, wave by wave.</p>
+                    <div class="gap-status">
+                        <span class="gap-icon">❌</span> Reset logic
+                    </div>
+                </div>
+                <div class="gap-cell expanded">
+                    <h4 class="gap-title">Structured Learning Loops continuous waves</h4>
+                    <p class="gap-desc">Modules acts act acts waves wave continuous reset waves wave continuous. Longitudinal learning continuous wave.</p>
+                    <div class="gap-status">
+                        <span class="gap-icon">✓</span> Learning waves continuous
+                    </div>
+                </div>
+                <div class="gap-cell adaptive">
+                    <h4 class="gap-title">Adaptive AI coming soon logic</h4>
+                    <p class="gap-desc">Adaptive AI logic reset waves wave logic waves acts compounds. AI powered waves logic waves logic continuous waves.</p>
+                    <div class="gap-status">
+                        <span class="gap-icon">✓</span> wave loop logic automated
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-form" id="contact">
+        <div class="container">
+            <div class="faq-form-grid">
+                <div class="form-trust" data-aos="fade-right">
+                    <div class="badge">Enterprise grade help</div>
+                    <h2>Start simple. Scale when ready.</h2>
+                    <p>Moving from Lite Mi to Expanded Mi isn't a platform switch — it's deepening the use of the shared architecture. Our region CEO's are ready to guide you on how to start de-risking creative earlier.</p>
+                    
+                    <div class="form-trust-item">
+                        <div class="form-trust-icon">💬</div>
+                        <div>
+                            <span style="font-weight:700;">Region Alignment</span>
+                            <span style="display:block; font-size:12px; color:var(--m-gray);">Our CEO's (Cindy, Ted) work closely with Gaurang Kotak on pricing summary sheets tailored to specific markets (SEA, UK, US). We ensure message confidence and value rather than process over-explanation.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card" data-aos="fade-left">
+                    <h4 class="seg-title" style="color:var(--m-blue);">Contact Our Team</h4>
+                    <p class="seg-desc">Fill in details. Start de-risking earlier wave loops.</p>
+                    <form onsubmit="alert('Mockup Enquiry Sent!'); return false;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name *</label>
+                                <input type="text" class="form-input" placeholder="Gaurang" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name *</label>
+                                <input type="text" class="form-input" placeholder="Kotak" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Work Email *</label>
+                            <input type="email" class="form-input" placeholder="gaurang.kotak@milieuinsight.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Company *</label>
+                            <input type="text" class="form-input" placeholder="Milieu Insight" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">market of interest *</label>
+                            <select class="form-select" required>
+                                <option value="" disabled selected>Select a market</option>
+                                <option>Southeast Asia (Cindy/Region CEO)</option>
+                                <option>United Kingdom</option>
+                                <option>United States</option>
+                                <option>Multi-market/Strategic Enterprise</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Deployment Interest *</label>
+                            <select class="form-select" required>
+                                <option value="" disabled selected>Select path interest</option>
+                                <option>Lite Mi (Tactical/Agency path)</option>
+                                <option>Expanded Mi (Established Strategic path)</option>
+                                <option>Bridge logic (Hybrid scaling path)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message / Research Need</label>
+                            <textarea class="form-textarea" placeholder="Example: Need simple per module quote waves logic wave loop waves wave loops... Lorem ipsum dolores wave loop waves wave logic wave loop wave logic wave loop waves wave logic..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Book Demo Enquiry Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <img src="Milieu Logo Regular.png" alt="Milieu Logo Regular" style="height:25px; margin-bottom: 20px;">
+            <p>© 2026 Milieu Insight. One Shared Campaign Intelligence architecture with two levels of deployment.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 900, once: true });
+
+        // Scroll effect for Navbar
+        window.onscroll = function() {
+            const nav = document.getElementById('navbar');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        // Feedback 4: Correct dynamic order and initial display
+        const moduleData = {
+            spark: { title: "Stage 1: Spark Mi (Idea Testing)", text: "Lite Mi deployment: Fixed adhoc validation. Wave reset logic. Expanded Mi: Deeper segmentation portraits connection longitudinal waves waves." },
+            shape: { title: "Stage 2: Shape Mi (Wireframes Dev)", text: "Lite Mi deployment: Standard waves outputs. Wave reset logic. Expanded Mi: custom framework tailoring longitudinal learning wave loops." },
+            impact: { title: "Stage 3: Impact Mi (Ad Testing)", text: "Lite Mi deployment: Clear outputs. Wave reset logic. 24h turnaround. Expanded Mi: Deeper diagnostics, Cuts wave loop waves wave logic." },
+            reach: { title: "Stage 4: Reach Mi (Media Fit)", text: "Lite Mi: standard outputs. Wave logic reset waves waves. Expanded Mi: Integrated decision architecture wave logic waves benchmarking." },
+            track: { title: "Stage 5: Track Mi (Monitoring)", text: "Lite Mi deployment: Wave reset. Wave loop waves waves. Expanded Mi: Deeper segmentation portraits connection longitudinal waves waves." },
+            proof: { title: "Stage 6: Proof Mi (Post-Campaign)", text: "Lite Mi deployment: standard outputs. Reset wave logic wave waves. Expanded Mi: Strategic program continuity benchmarking wave loop waves." },
+            loop: { title: "Stage 7: Loop Mi (Learning continuous)", text: "Modules acts act acts waves wave continuous reset waves wave continuous. Longitudinal learning continuous wave." },
+            pulse: { title: "Stage 8: Adaptive Mi (AI Learning Automated)", text: "adaptive AI driven acts learning continuous waves acts logic waves acts compounds acts acts acts compounds acts acts automated reset acts acts acts automated waves wave acts automated waves waves wave acts waves." }
+        };
+
+        function showModule(key) {
+            const data = moduleData[key];
+            const infoHeader = document.querySelector('.info-header');
+            const infoDesc = document.querySelector('.info-desc');
+            
+            // Highlight active step
+            document.querySelectorAll('.stair-step').forEach(s => s.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Update content logic موجة waves reset acts standard acts acts acts acts standard acts standard waves موجة reset acts acts standard waves wave standard waves waves standard acts acts waves reset acts acts automated wave
+            infoHeader.style.opacity = 0;
+            infoDesc.style.opacity = 0;
+            setTimeout(() => {
+                infoHeader.innerText = data.title;
+                infoDesc.innerText = data.text;
+                infoHeader.style.opacity = 1;
+                infoDesc.style.opacity = 1;
+            }, 100);
+        }
+    </script>
+</body>
+</html>
